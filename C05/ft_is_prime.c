@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_is_prime.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lquemper <lquemper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/15 10:58:49 by lquemper          #+#    #+#             */
-/*   Updated: 2024/03/15 14:50:11 by lquemper         ###   ########.fr       */
+/*   Created: 2024/03/29 13:53:34 by lquemper          #+#    #+#             */
+/*   Updated: 2024/03/29 14:45:19 by lquemper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include<unistd.h>
+#include<stdlib.h>
 
-void	ft_putchar(char c);
-void	ft_putnbr(int nb);
-
-void	ft_putchar(char c)
+/*void	ft_putstr(int *str)
 {
-	write(1, &c, 1);
-}
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		write(1, str, 1);
+		i++;
+	}
+}*/
+
+char	ft_putchar()
 
 void	ft_putnbr(int nb)
 {
-	if (nb == 0)
-		ft_putchar(nb + '0');
 	if (nb == -2147483648)
 		write (1, "-2147483648", 11);
 	else
@@ -41,15 +46,25 @@ void	ft_putnbr(int nb)
 	}
 }
 
-#include<stdlib.h>
-int main(int argc, char **argv)
+int	ft_is_prime(int nb)
+{
+	int	i;
+
+	i = 2;
+	if (nb < 2 || (nb % 2 == 0 && nb != 2))
+		return (0);
+	while (i * i <= nb)
+	{
+		if (nb % i == 0)
+			return(0);
+		i++;
+	}
+	return (1);
+}
+
+int	main(int argc, char **argv)
 {
 	if (argc == 2)
-	{
-		ft_putnbr(atoi(argv[1]));
-		write (1, "\n", 1);
-	}
-	else
-		return (1);
+		ft_putnbr(ft_is_prime(atoi(argv[1])));
 	return (0);
 }
